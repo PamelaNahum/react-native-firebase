@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import { View, Button, TextInput, ScrollView, StyleSheet } from 'react-native';
 import firebase from '../database/firebase';
 
-const CreateUserScreen = () =>{
+const CreateUserScreen = (props) =>{
 
     //se crea una funcion que va guardando el estado del objeto
 
     const [state, setState]=useState({
-        name:'',
-        correo:'',
-        telefono:''
+        name:"",
+        correo:"",
+        telefono:""
     });
     /*En esta funcion se toman dos parametros y con ellos se le asiga 
     un valor al otro y con el ...state mantiene el estado de las demás
@@ -23,14 +23,14 @@ const CreateUserScreen = () =>{
     la tabla con el collecttion e ingresa el usuario, buenardo la verdad XD */
 
     const createNewUser = async()=>{
-        if (state.name===''){
+        if (state.name===""){
             alert('Debes ingresar un nombre de usuario')
         } 
-        else if(state.correo===''){
+        else if(state.correo===""){
             alert('Debes ingresar un correo')
 
         }        
-        else if(state.telefono===''){
+        else if(state.telefono===""){
             alert('Debes ingresar un telefono')
 
         }
@@ -40,7 +40,8 @@ const CreateUserScreen = () =>{
                 correo: state.correo,
                 telefono: state.telefono
             })
-            alert('Guardado')
+            props.navigation.navigate("UsersList");
+            
         }
 
 
