@@ -18,6 +18,10 @@ const CreateUserScreen = () =>{
         setState({...state, [name]:value})
     }
 
+    /*con esta funcion yo primero verifico los campos
+    y luego conecto con la base, la base genera de forma automática
+    la tabla con el collecttion e ingresa el usuario, buenardo la verdad XD */
+
     const createNewUser = async()=>{
         if (state.name===''){
             alert('Debes ingresar un nombre de usuario')
@@ -41,6 +45,10 @@ const CreateUserScreen = () =>{
 
 
     }
+
+    /*aqui yo retorno báscicamente el diseño, pero la
+    magia se hace arriba, es como django pero en la screen se hace todo junto 
+    (será seguro? :o) */
 
     return(
         <ScrollView style={styles.container}>
