@@ -5,7 +5,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import UsersList from './screens/UsersList';
 import CreateUserScreen from './screens/CreateUserScreen';
+import { Header } from 'react-native-elements';
 import UserDetailsScreen from './screens/UserDetailsScreen';
+import PrincipalEjemplo from './screens/PrincipalEjemplo';
 
 const Stack = createStackNavigator();
 function MyStack(){
@@ -14,12 +16,33 @@ function MyStack(){
   video de apoyo para el próximo proyecto https://www.youtube.com/watch?v=VE7J0SA1PRQ
   */
   return(
-    <Stack.Navigator>
-      <Stack.Screen name="UsersList" component={UsersList}/>  
+    <Stack.Navigator
+    screenOptions={{
+      headerBackTitleVisible: false,
+    }}>
+      <Stack.Screen 
+      name="Principal" component={PrincipalEjemplo} 
+      options={{ headerTitle: 'Bienvenido', 
+      headerTintColor: '#4f7d67', 
+      headerStyle:{backgroundColor: '#fff'}}}/>
         
-      <Stack.Screen name="CreateUserScreen" component={CreateUserScreen}/>
+      <Stack.Screen 
+      name="CreateUserScreen" component={CreateUserScreen} 
+      options={{ headerTitle: 'Crear Usuario', 
+      headerTintColor: '#4f7d67', 
+      headerStyle:{backgroundColor: '#fff'}}}/>
+
+      <Stack.Screen 
+      name="UsersList" component={UsersList}
+      options={{ headerTitle: 'Lista de Usuarios', 
+      headerTintColor: '#4f7d67', 
+      headerStyle:{backgroundColor: '#fff'}}}/>  
       
-      <Stack.Screen name="UserDetailsScreen" component={UserDetailsScreen}/>
+      <Stack.Screen 
+      name="UserDetailsScreen" component={UserDetailsScreen}
+      options={{ headerTitle: "Detalles de usuario", 
+      headerTintColor: '#4f7d67', 
+      headerStyle:{backgroundColor: '#fff'}}}/>
 
     </Stack.Navigator>
 
@@ -27,8 +50,10 @@ function MyStack(){
 
 }
 export default function App() {
-  return (
+  return (   
+    
     <NavigationContainer>
+      
       <MyStack>
 
       </MyStack>

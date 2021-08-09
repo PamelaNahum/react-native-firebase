@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { View, Button, TextInput, ScrollView, StyleSheet, ActivityIndicator, Alert  } from 'react-native';
+import { AceptButton, DeleteButton } from '../components';
 import firebase from '../database/firebase';
+import CircularProgress from 'react-native-circular-progress-indicator'
 
 const UserDetailsScreen = (props) =>{
+    
 
     //se creó esta funcion para no tener que escribir el objeto vacio mil veces
     const objetoInicial={
@@ -10,6 +13,7 @@ const UserDetailsScreen = (props) =>{
         name:"",
         correo:"",
         telefono:"",
+        numCont:0,
 
     }
     //con esto se hace un "cargando"
@@ -52,7 +56,8 @@ const UserDetailsScreen = (props) =>{
         await dbRef.set({
             name: user.name,
             correo: user.correo,
-            telefono: user.telefono
+            telefono: user.telefono,
+            numCont: user.numCont
         })
         setUser(objetoInicial)
         props.navigation.navigate('UsersList')
@@ -100,11 +105,26 @@ const UserDetailsScreen = (props) =>{
                 value={user.telefono}
                 onChangeText={(value)=>handleChangeText('telefono', value)}/>
             </View>
-            <Button title="Guardar Usuario" onPress={()=> modificarUsuario()}/>
-            <Button 
-            color="red"
-            title="Eliminar Usuario" onPress={()=> confEliminar()}/>
-
+            <View style={styles.inputGroup}>
+                <TextInput 
+                placeholder="Numero gráfico"
+                value={user.numCont}
+                onChangeText={(value)=>handleChangeText('numCont', value)}/>
+            </View>
+            <View style={{alignItems:'center'}}>
+            <CircularProgress  
+            radius={90}
+            value={parseInt(user.numCont)}
+            textColor='black'
+            fontSize={20}
+            valueSuffix={'%'}
+            inActiveStrokeColor={'#27b871'}
+            inActiveStrokeOpacity={0.2}
+            duration={3000}
+            />        
+        </View>
+            <AceptButton onPress={()=> modificarUsuario()}>Guardar Usuario</AceptButton>
+            <DeleteButton onPress={()=> confEliminar()}>Eliminar Usuario</DeleteButton>
         </ScrollView>
         
     )

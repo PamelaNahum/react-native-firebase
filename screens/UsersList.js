@@ -3,6 +3,8 @@ import { View, Text, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import firebase from '../database/firebase';
 import { ListItem, Avatar } from 'react-native-elements';
+import { SubmitButton } from '../components';
+
 
 const UsersList = (props) =>{
     //aqui se rea la lista que va a guardar los datos que llegen de la base
@@ -30,9 +32,7 @@ const UsersList = (props) =>{
 
     return(
         <ScrollView>
-            <Button title="Atras"
-            onPress={()=>props.navigation.navigate("CreateUserScreen")}/>
-
+                       
             {
                 users.map(user => {
                     return(
@@ -56,6 +56,7 @@ const UsersList = (props) =>{
                     )
                 })
             }
+            <SubmitButton onPress={()=>props.navigation.navigate("CreateUserScreen")}>Atras</SubmitButton>
         </ScrollView>
         
     )

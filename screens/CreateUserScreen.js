@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import { View, Button, TextInput, ScrollView, StyleSheet } from 'react-native';
+import { View, Button, TextInput, ScrollView, StyleSheet} from 'react-native';
+import { Header } from 'react-native-elements';
+import { AceptButton, SubmitButton } from '../components';
 import firebase from '../database/firebase';
 
 const CreateUserScreen = (props) =>{
@@ -9,7 +11,8 @@ const CreateUserScreen = (props) =>{
     const [state, setState]=useState({
         name:"",
         correo:"",
-        telefono:""
+        telefono:"",
+        numCont:0,
     });
     /*En esta funcion se toman dos parametros y con ellos se le asiga 
     un valor al otro y con el ...state mantiene el estado de las demás
@@ -38,7 +41,8 @@ const CreateUserScreen = (props) =>{
             await firebase.db.collection('users').add({
                 name: state.name,
                 correo: state.correo,
-                telefono: state.telefono
+                telefono: state.telefono,
+                numCont: 0
             })
             props.navigation.navigate("UsersList");
             
@@ -47,12 +51,17 @@ const CreateUserScreen = (props) =>{
 
     }
 
+    const verUsuario=(()=>{
+        return(props.navigation.navigate('UsersList'))
+    });
+
     /*aqui yo retorno báscicamente el diseño, pero la
     magia se hace arriba, es como django pero en la screen se hace todo junto 
     (será seguro? :o) */
 
     return(
         <ScrollView style={styles.container}>
+            
             <View style={styles.inputGroup}> 
                 <TextInput 
                 placeholder="Nombre de usuario"
@@ -70,7 +79,14 @@ const CreateUserScreen = (props) =>{
                 placeholder="Telefono"
                 onChangeText={(value)=>handleChangeText('telefono', value)}/>
             </View>
-            <Button title="Guardar Usuario" onPress={()=> createNewUser()}/>
+            <View>
+            <SubmitButton onPress={()=> createNewUser()}>Crear usuario</SubmitButton>
+            </View>
+            <View> 
+            <AceptButton onPress={()=> verUsuario()}>Ver usuarios</AceptButton>
+            </View>
+            
+            
 
         </ScrollView>
         
@@ -89,7 +105,8 @@ const styles = StyleSheet.create({
         borderBottomWidth:1,
         borderBottomColor:'#cccccc',
         marginTop:10,
-    }
+    },
+    
 })
 
 export default CreateUserScreen
