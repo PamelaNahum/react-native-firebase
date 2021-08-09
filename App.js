@@ -21,7 +21,7 @@ function MyStack(){
       headerBackTitleVisible: false,
     }}>
       <Stack.Screen 
-      name="Principal" component={PrincipalEjemplo} 
+      name="Login" component={PrincipalEjemplo} 
       options={{ headerTitle: 'Bienvenido', 
       headerTintColor: '#4f7d67', 
       headerStyle:{backgroundColor: '#fff'}}}/>

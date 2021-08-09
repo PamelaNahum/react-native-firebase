@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "@fseehawer/react-circular-slider": "^2.3.5",
+    "@react-native-community/google-signin": "^5.0.0",
+    "@react-native-firebase/app": "^12.4.0",
+    "@react-native-firebase/auth": "^12.4.0",
     "@react-navigation/native": "^6.0.1",
     "@react-navigation/stack": "^6.0.1",
     "expo": "~42.0.1",
@@ -21,6 +24,7 @@
     "react-native-circular-progress-indicator": "^1.1.1",
     "react-native-elements": "^3.4.2",
     "react-native-elements-universe": "^0.0.0",
+    "react-native-fbsdk": "^3.0.0",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "^3.5.0",

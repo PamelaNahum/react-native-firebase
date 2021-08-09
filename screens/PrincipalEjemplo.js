@@ -1,28 +1,68 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native'; 
-import CircularProgress from 'react-native-circular-progress-indicator'
-import { AceptButton } from '../components';
-
+import {View, TextInput, ScrollView, StyleSheet, Alert} from 'react-native'; 
+import { AceptButton, SubmitButton  } from '../components';
+import {login} from '../controller/loginController'
 
 const PrincipalEjemplo = (props) =>{
-    //creacion de circulo animado https://www.youtube.com/watch?v=9VvXDf7ACIw
+
+    //Se generar variables de cambio de email y pass
+    
+    const [email, setEmail]=useState("")
+    const [password, setPassword]=useState("")
+
+    //Se llama a la funcion que genera el login en la base de datos
+
+    const iniciarSesion =()=>{
+        login(email, password, props)
+    }
+    
 
     return(
-        <View style={{alignItems:'center'}}>
-            <CircularProgress  
-            radius={90}
-            value={70}
-            textColor='black'
-            fontSize={20}
-            valueSuffix={'%'}
-            inActiveStrokeColor={'#27b871'}
-            inActiveStrokeOpacity={0.2}
-            duration={3000}
-            />  
-            <AceptButton onPress={()=>props.navigation.navigate("CreateUserScreen")}>Ingresar Usuario</AceptButton>                
-        </View>
+        <ScrollView style={styles.container}>
+            
+            <View style={styles.inputGroup}> 
+                <TextInput 
+                placeholder="Usuario"
+                value={email}
+                onChangeText={(text)=>setEmail(text)}
+                />
+            </View>
+            <View style={styles.inputGroup}>
+                <TextInput 
+                placeholder="Password"
+                secureTextEntry={true}
+                value={password}
+                onChangeText={(text)=>setPassword(text)}
+                />
+            </View>
+            <View>
+            <SubmitButton onPress={()=> iniciarSesion()}>Iniciar sesion</SubmitButton>
+            </View>
+            <View> 
+            <AceptButton onPress={()=>props.navigation.navigate("CreateUserScreen")}>Registrate</AceptButton>
+            </View>          
+            
+
+        </ScrollView>
         
     )
 }
+
+const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        padding:35,
+    },
+    inputGroup:{
+        flex:1,
+        padding:0,
+        marginBottom:15,
+        borderBottomWidth:1,
+        borderBottomColor:'#cccccc',
+        marginTop:10,
+    },
+    
+})
 
 export default PrincipalEjemplo

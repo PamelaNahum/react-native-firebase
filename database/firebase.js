@@ -16,10 +16,11 @@ var firebaseConfig = {
   /*Como vamos a trabajar con la base en otras vistas, esta se debe exportar,
   aqui se exporta con los parametros firebase y bd, cosa de llamarla desde
   los componentes y screen como firebase.db(etc..) */
-
+  
   const db = firebase.firestore();
   export default{
       firebase,
       db,
+      
 
   };
