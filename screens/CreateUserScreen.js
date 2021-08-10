@@ -29,8 +29,8 @@ const CreateUserScreen = (props) =>{
         if (state.name===""){
             alert('Debes ingresar un nombre de usuario')
         } 
-        else if(state.correo===""){
-            alert('Debes ingresar un correo')
+        else if(state.numCont===""){
+            alert('Debes ingresar una cantidad')
 
         }        
         else if(state.telefono===""){
@@ -39,10 +39,11 @@ const CreateUserScreen = (props) =>{
         }
         else{
             await firebase.db.collection('users').add({
+                id: props.route.params.user_id,
                 name: state.name,
-                correo: state.correo,
+                correo: props.route.params.user_correo,
                 telefono: state.telefono,
-                numCont: 0
+                numCont: parseInt(state.numCont)
             })
             props.navigation.navigate("UsersList");
             
@@ -64,20 +65,19 @@ const CreateUserScreen = (props) =>{
             
             <View style={styles.inputGroup}> 
                 <TextInput 
-                placeholder="Nombre de usuario"
+                placeholder="Nombre Completo"
                 onChangeText={(value)=>handleChangeText('name', value)}
-                />
-            </View>
-            <View style={styles.inputGroup}>
-                <TextInput 
-                placeholder="Correo"
-                onChangeText={(value)=>handleChangeText('correo', value)}
                 />
             </View>
             <View style={styles.inputGroup}>
                 <TextInput 
                 placeholder="Telefono"
                 onChangeText={(value)=>handleChangeText('telefono', value)}/>
+            </View>
+            <View style={styles.inputGroup}>
+                <TextInput 
+                placeholder="Cantidad de emisiones"
+                onChangeText={(value)=>handleChangeText('numCont', value)}/>
             </View>
             <View>
             <SubmitButton onPress={()=> createNewUser()}>Crear usuario</SubmitButton>

@@ -105,12 +105,6 @@ const UserDetailsScreen = (props) =>{
                 value={user.telefono}
                 onChangeText={(value)=>handleChangeText('telefono', value)}/>
             </View>
-            <View style={styles.inputGroup}>
-                <TextInput 
-                placeholder="Numero gráfico"
-                value={user.numCont}
-                onChangeText={(value)=>handleChangeText('numCont', value)}/>
-            </View>
             <View style={{alignItems:'center'}}>
             <CircularProgress  
             radius={90}

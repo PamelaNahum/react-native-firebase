@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import { result } from "lodash";
 import { Alert } from "react-native";
 
 // ejemplo de como hacerlo mas o menos https://www.youtube.com/watch?v=rataaQ3O05M
@@ -6,10 +7,17 @@ import { Alert } from "react-native";
 //Se crea funcion que genera el login y redirige a la vista principal
 export function login (email, password, props){
     //const user = {'email': email, 'password': password}
+    
     firebase.auth()
         .signInWithEmailAndPassword(email, password)
-        .then(()=>{
-            props.navigation.navigate('CreateUserScreen')
+        .then(( )=>{
+            const user = firebase.auth().currentUser;
+
+            if (user) {
+                props.navigation.navigate('Home',{
+                    user_id:user.uid
+                })
+            }
         })
         .catch(()=>{
             Alert.alert("Usuario inválido","Revise sus datos")
@@ -18,12 +26,23 @@ export function login (email, password, props){
 //siguiendo la misma lógioca con esto debería ser para crear xD
 export function signUp (email, password, props){
     firebase.auth()
-    .createUserWithEmailAndPassword(email,password, props)
+    .createUserWithEmailAndPassword(email,password)
     .then(()=>{
-        props.navigation.navigate('Login')
+        const user = firebase.auth().currentUser;
+        console.log(user.uid)
+        if (user) {
+            props.navigation.navigate('CreateUserScreen',{
+                user_id:user.uid, user_correo:user.email
+            })
+        }
+ 
+        
+            
     })
-    .catch(()=>{
-        Alert.alert("Usuario inválido","Revise sus datos")
+    .catch((error)=>{
+        Alert.alert("Datos inválidos","Debe ingresar todos los campos correctamente")
+        console.log(error)
     })
 
 };
+

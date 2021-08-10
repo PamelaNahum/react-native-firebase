@@ -1,13 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import UsersList from './screens/UsersList';
 import CreateUserScreen from './screens/CreateUserScreen';
-import { Header } from 'react-native-elements';
 import UserDetailsScreen from './screens/UserDetailsScreen';
+import SignUp from './screens/SignUp';
 import PrincipalEjemplo from './screens/PrincipalEjemplo';
+import Home from './screens/Home';
 
 const Stack = createStackNavigator();
 function MyStack(){
@@ -41,6 +42,18 @@ function MyStack(){
       <Stack.Screen 
       name="UserDetailsScreen" component={UserDetailsScreen}
       options={{ headerTitle: "Detalles de usuario", 
+      headerTintColor: '#4f7d67', 
+      headerStyle:{backgroundColor: '#fff'}}}/>
+
+      <Stack.Screen 
+      name="SignUp" component={SignUp}
+      options={{ headerTitle: "Registrate", 
+      headerTintColor: '#4f7d67', 
+      headerStyle:{backgroundColor: '#fff'}}}/>
+
+      <Stack.Screen 
+      name="Home" component={Home}
+      options={{ headerTitle: "Bienvenido", 
       headerTintColor: '#4f7d67', 
       headerStyle:{backgroundColor: '#fff'}}}/>
 

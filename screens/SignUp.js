@@ -2,19 +2,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {View, TextInput, ScrollView, StyleSheet, Alert} from 'react-native'; 
 import { AceptButton, SubmitButton  } from '../components';
-import {login} from '../controller/loginController'
+import {signUp} from '../controller/loginController'
 
-const PrincipalEjemplo = (props) =>{
+const SignUp = (props) =>{
 
     //Se generar variables de cambio de email y pass
     
-    const [email, setEmail]=useState("pamela.nahum14@gmail.com")
-    const [password, setPassword]=useState("Pamela.14")
+    const [email, setEmail]=useState("")
+    const [password, setPassword]=useState("")
 
     //Se llama a la funcion que genera el login en la base de datos
 
-    const iniciarSesion =()=>{
-        login(email, password, props)
+    const registrarse =()=>{
+        signUp(email, password, props)
     }
     
 
@@ -23,24 +23,24 @@ const PrincipalEjemplo = (props) =>{
             
             <View style={styles.inputGroup}> 
                 <TextInput 
-                placeholder="Usuario"
+                placeholder="Ingresa tu correo"
                 value={email}
                 onChangeText={(text)=>setEmail(text)}
                 />
             </View>
             <View style={styles.inputGroup}>
                 <TextInput 
-                placeholder="Password"
+                placeholder="Ingresa una contraseña"
                 secureTextEntry={true}
                 value={password}
                 onChangeText={(text)=>setPassword(text)}
                 />
             </View>
             <View>
-            <SubmitButton onPress={()=> iniciarSesion()}>Iniciar sesion</SubmitButton>
+            <SubmitButton onPress={()=> registrarse()}>Registrate</SubmitButton>
             </View>
             <View> 
-            <AceptButton onPress={()=>props.navigation.navigate("SignUp")}>Registrate</AceptButton>
+            <AceptButton onPress={()=>props.navigation.navigate("Login")}>Volver</AceptButton>
             </View>          
             
 
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
     
 })
 
-export default PrincipalEjemplo
+export default SignUp
