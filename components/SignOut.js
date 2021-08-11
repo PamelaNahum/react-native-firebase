@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import firebase from 'firebase';
 
-export default (props) => {
+export default () => {
 
 const signOut =()=>{
   firebase.auth().signOut().then(()=>{

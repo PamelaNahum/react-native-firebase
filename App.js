@@ -17,6 +17,8 @@ function MyStack(props){
   */
  /*para ver el tema de las notificaciones https://www.youtube.com/watch?v=-2zoM_QWGY0
  ahora me da paja asique será mañana xDDDD */
+ /*para ver headers mas bellos https://dev.to/netguru/stickyheader-js-beautiful-headers-in-react-native-5ac1
+ https://cloudstack.ninja/chamcham/overlapping-react-navigation-header-in-react-native-app/ */
   return(
     <Stack.Navigator
     screenOptions={{

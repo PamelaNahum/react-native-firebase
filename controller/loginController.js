@@ -46,7 +46,9 @@ export function signUp (email, password, props){
 };
 
 export function logOut(props){
-    firebase.auth().signOut()
-        props.navigation.navigate('login')
+    firebase.auth().signOut().then(()=>{
+        props.navigation.navigate('Login')
+    })
+        
 };
 
