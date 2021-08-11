@@ -1,17 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import { View, ScrollView, StyleSheet} from 'react-native';
-import { AceptButton, DeleteButton } from '../components';
 import firebase from '../database/firebase';
 import CircularProgress from 'react-native-circular-progress-indicator';
-import { Avatar, ListItem } from "react-native-elements";
-
+import { Avatar, ListItem, PricingCard } from "react-native-elements";
+import { DeleteButton } from '../components';
+import {logOut} from '../controller/loginController'
 
 const Home = (props) =>{
+
+    const signOut=()=>{
+        logOut(props);
+    }
     
 
     //se creó esta funcion para no tener que escribir el objeto vacio mil veces
     const objetoInicial={
-        id:"",
+        uid:"",
         name:"",
         correo:"",
         telefono:"",
@@ -24,25 +28,33 @@ const Home = (props) =>{
     //con esto tomamos el usuario vacio y lo alistamos para tomar parámetros
     const [user, setUser] = useState(objetoInicial)
     
-    
-
     const getUserById = async(id) => {
-        //aqui yo recibo el id que envíe como parámetro en la vista anterior
-        const dbRef= firebase.db.collection("users").doc(id)
-        const doc = await dbRef.get();
-        const user =doc.data();
-        //aqui yo ya comienzo a actualizar al usuario
-        setUser({
-            ...user,
-            id:doc.id,
-        });
+        //finalmente, una consulta decente xD
+        const dbRef= firebase.db.collection("users").where("uid","==", id).get()
+        .then(function(querySnapshot){
+            querySnapshot.forEach(function(doc){
+                const user=doc.data();
+                setUser({
+                    ...user,
+                    id:doc.id,
+                });
+            })
+            
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+        
         setLoading(false)
     };
+    
+
+    
 
     useEffect(()=>{
         getUserById(props.route.params.user_id);
     },[])   
-    
+
     return(
         <ScrollView>
             
@@ -50,7 +62,7 @@ const Home = (props) =>{
             <ListItem>
             <Avatar
             rounded
-            icon={{name:'user', color:'green', type: 'font-awesome-5'}}
+            icon={{name:'star', color:'green', type: 'font-awesome'}}
             onPress={() => console.log("Works!")}
             />
             <ListItem.Content>
@@ -70,13 +82,34 @@ const Home = (props) =>{
             inActiveStrokeColor={'#27b871'}
             inActiveStrokeOpacity={0.2}
             duration={3000}
-            />        
-        </View>
-        <View>
-            <AceptButton>Guardar Usuario</AceptButton>
+            />      
+        </View> 
+        <View style={styles.card}>
+        <PricingCard 
+            infoStyle={styles.cuadro}
+            color="green"
+            title="Cantidad de consumo"
+            titleStyle={styles.title}
+            price={[user.numCont, '%']}
+            info={[['La catidad'],['de consumo'],['en este mes es: '],[user.numCont,'%']]}
+            button={{ icon: 'star' }}
             
-            <DeleteButton >Eliminar Usuario</DeleteButton>
+            />  
+            
+            <PricingCard 
+            infoStyle={styles.cuadro}
+            color="green"
+            title="Cantidad de consumo"
+            titleStyle={styles.title}
+            price={[user.numCont, '%']}
+            info={[['La catidad'],['de consumo'],['en este mes es: '],[user.numCont,'%']]}
+            button={{ icon: 'star' }}
+            
+            /> 
         </View>
+        
+       
+        
         </ScrollView>
         
     )
@@ -104,6 +137,18 @@ const styles = StyleSheet.create({
         marginTop:30,
         marginBottom:30
 
+    },
+    card:{
+        flex:1,
+        flexDirection:'row',
+        alignSelf:'center'
+    },
+    cuadro:{
+        height:20,
+        width:120,
+    },
+    title:{
+        fontSize:12
     }
 })
 export default Home

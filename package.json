@@ -8,6 +8,10 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.0-7",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
     "@fseehawer/react-circular-slider": "^2.3.5",
     "@react-native-community/google-signin": "^5.0.0",
     "@react-native-firebase/app": "^12.4.0",
@@ -21,7 +25,6 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
-    "react-native-circle-slider": "^2.9.0",
     "react-native-circular-progress-indicator": "^1.1.1",
     "react-native-elements": "^3.4.2",
     "react-native-elements-universe": "^0.0.0",

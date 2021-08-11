@@ -1,5 +1,4 @@
 import firebase from "firebase";
-import { result } from "lodash";
 import { Alert } from "react-native";
 
 // ejemplo de como hacerlo mas o menos https://www.youtube.com/watch?v=rataaQ3O05M
@@ -15,7 +14,7 @@ export function login (email, password, props){
 
             if (user) {
                 props.navigation.navigate('Home',{
-                    user_id:user.uid
+                    user_id:user.uid,  user_correo:user.email
                 })
             }
         })
@@ -44,5 +43,10 @@ export function signUp (email, password, props){
         console.log(error)
     })
 
+};
+
+export function logOut(props){
+    firebase.auth().signOut()
+        props.navigation.navigate('login')
 };
 

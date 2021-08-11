@@ -21,6 +21,17 @@ const CreateUserScreen = (props) =>{
         setState({...state, [name]:value})
     }
 
+    /*const modificarUsuario = async(props)=>{
+        const usuario=props.route.params.usuario;
+        await usuario.set({
+            id: user.name,
+            correo: user.correo,
+            telefono: user.telefono,
+            numCont: user.numCont
+        })
+        setUser(objetoInicial)
+        props.navigation.navigate('UsersList')*/
+
     /*con esta funcion yo primero verifico los campos
     y luego conecto con la base, la base genera de forma automática
     la tabla con el collecttion e ingresa el usuario, buenardo la verdad XD */
@@ -39,13 +50,13 @@ const CreateUserScreen = (props) =>{
         }
         else{
             await firebase.db.collection('users').add({
-                id: props.route.params.user_id,
+                uid: props.route.params.user_id,
                 name: state.name,
                 correo: props.route.params.user_correo,
                 telefono: state.telefono,
                 numCont: parseInt(state.numCont)
             })
-            props.navigation.navigate("UsersList");
+            props.navigation.navigate("Login");
             
         }
 

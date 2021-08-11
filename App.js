@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,9 +8,11 @@ import UserDetailsScreen from './screens/UserDetailsScreen';
 import SignUp from './screens/SignUp';
 import PrincipalEjemplo from './screens/PrincipalEjemplo';
 import Home from './screens/Home';
+import SignOut from './components/SignOut';
+import {logOut} from './controller/loginController';
 
 const Stack = createStackNavigator();
-function MyStack(){
+function MyStack(props){
   /*los stack siempre se ponen en el orden en el que van a aparecer
   siempre ponerlos con mayuscula en la carpeta screen
   video de apoyo para el próximo proyecto https://www.youtube.com/watch?v=VE7J0SA1PRQ
@@ -25,7 +26,8 @@ function MyStack(){
       name="Login" component={PrincipalEjemplo} 
       options={{ headerTitle: 'Bienvenido', 
       headerTintColor: '#4f7d67', 
-      headerStyle:{backgroundColor: '#fff'}}}/>
+      headerStyle:{backgroundColor: '#fff'}
+      }}/>
         
       <Stack.Screen 
       name="CreateUserScreen" component={CreateUserScreen} 
@@ -82,5 +84,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  button: {
+    marginRight: 20,
+    color:'black',
   },
 });

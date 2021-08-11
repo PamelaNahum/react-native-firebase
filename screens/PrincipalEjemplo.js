@@ -36,6 +36,7 @@ const PrincipalEjemplo = (props) =>{
                 onChangeText={(text)=>setPassword(text)}
                 />
             </View>
+            
             <View>
             <SubmitButton onPress={()=> iniciarSesion()}>Iniciar sesion</SubmitButton>
             </View>

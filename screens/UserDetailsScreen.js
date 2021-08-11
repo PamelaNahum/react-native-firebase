@@ -105,6 +105,7 @@ const UserDetailsScreen = (props) =>{
                 value={user.telefono}
                 onChangeText={(value)=>handleChangeText('telefono', value)}/>
             </View>
+            
             <View style={{alignItems:'center'}}>
             <CircularProgress  
             radius={90}
