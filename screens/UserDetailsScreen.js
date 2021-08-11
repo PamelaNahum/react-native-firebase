@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View, Button, TextInput, ScrollView, StyleSheet, ActivityIndicator, Alert  } from 'react-native';
+import { View, TextInput, ScrollView, StyleSheet, ActivityIndicator, Alert  } from 'react-native';
 import { AceptButton, DeleteButton } from '../components';
 import firebase from '../database/firebase';
 import CircularProgress from 'react-native-circular-progress-indicator'

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import { View, Button, TextInput, ScrollView, StyleSheet} from 'react-native';
-import { Header } from 'react-native-elements';
+import { View, TextInput, ScrollView, StyleSheet} from 'react-native';
 import { AceptButton, SubmitButton } from '../components';
 import firebase from '../database/firebase';
 
@@ -20,17 +19,6 @@ const CreateUserScreen = (props) =>{
     const handleChangeText = (name, value) =>{
         setState({...state, [name]:value})
     }
-
-    /*const modificarUsuario = async(props)=>{
-        const usuario=props.route.params.usuario;
-        await usuario.set({
-            id: user.name,
-            correo: user.correo,
-            telefono: user.telefono,
-            numCont: user.numCont
-        })
-        setUser(objetoInicial)
-        props.navigation.navigate('UsersList')*/
 
     /*con esta funcion yo primero verifico los campos
     y luego conecto con la base, la base genera de forma automática

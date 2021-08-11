@@ -3,7 +3,6 @@ import { View, ScrollView, StyleSheet} from 'react-native';
 import firebase from '../database/firebase';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { Avatar, ListItem, PricingCard } from "react-native-elements";
-import { DeleteButton } from '../components';
 import {logOut} from '../controller/loginController'
 
 const Home = (props) =>{

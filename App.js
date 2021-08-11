@@ -8,8 +8,6 @@ import UserDetailsScreen from './screens/UserDetailsScreen';
 import SignUp from './screens/SignUp';
 import PrincipalEjemplo from './screens/PrincipalEjemplo';
 import Home from './screens/Home';
-import SignOut from './components/SignOut';
-import {logOut} from './controller/loginController';
 
 const Stack = createStackNavigator();
 function MyStack(props){
@@ -17,6 +15,8 @@ function MyStack(props){
   siempre ponerlos con mayuscula en la carpeta screen
   video de apoyo para el próximo proyecto https://www.youtube.com/watch?v=VE7J0SA1PRQ
   */
+ /*para ver el tema de las notificaciones https://www.youtube.com/watch?v=-2zoM_QWGY0
+ ahora me da paja asique será mañana xDDDD */
   return(
     <Stack.Navigator
     screenOptions={{

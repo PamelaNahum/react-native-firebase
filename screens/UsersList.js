@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { View, Text, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import firebase from '../database/firebase';
-import { ListItem, Avatar } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import { SubmitButton } from '../components';
 
 

@@ -1,6 +1,5 @@
-import { NavigationContainer } from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
-import {View, TextInput, ScrollView, StyleSheet, Alert} from 'react-native'; 
+import React, { useState} from 'react';
+import {View, TextInput, ScrollView, StyleSheet} from 'react-native'; 
 import { AceptButton, SubmitButton  } from '../components';
 import {signUp} from '../controller/loginController'
 
