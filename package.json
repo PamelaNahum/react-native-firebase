@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.0-7",
@@ -23,6 +24,8 @@
     "expo-status-bar": "~1.0.4",
     "firebase": "8.2.3",
     "firebase-functions": "^3.14.1",
+    "patch-package": "^6.4.7",
+    "postinstall-postinstall": "^2.1.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
@@ -33,6 +36,7 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
+    "react-native-sticky-parallax-header": "^0.4.0",
     "react-native-svg": "^12.1.1",
     "react-native-web": "~0.13.12"
   },

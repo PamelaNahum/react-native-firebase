@@ -1,16 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { View, ScrollView, StyleSheet} from 'react-native';
-import firebase from '../database/firebase';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { Avatar, ListItem, PricingCard } from "react-native-elements";
 import {logOut} from '../controller/loginController'
+import firebase from '../database/firebase';
 
 const Home = (props) =>{
-
-    const signOut=()=>{
-        logOut(props);
-    }
-    
+   
 
     //se creó esta funcion para no tener que escribir el objeto vacio mil veces
     const objetoInicial={
@@ -61,7 +57,7 @@ const Home = (props) =>{
             <ListItem>
             <Avatar
             rounded
-            icon={{name:'star', color:'green', type: 'font-awesome'}}
+            icon={{name:'sunset', color:'orange', type: 'feather'}}
             onPress={() => console.log("Works!")}
             />
             <ListItem.Content>
@@ -69,6 +65,11 @@ const Home = (props) =>{
                 <ListItem.Subtitle>{user.correo}</ListItem.Subtitle>
             
             </ListItem.Content>
+            <Avatar
+            rounded
+            icon={{name:'log-out', color:'black', type: 'entypo'}}
+            onPress={() => logOut(props)}
+            />
             </ListItem>
             </View>
             <View style={styles.graphic}>
