@@ -3,7 +3,8 @@ import { View, ScrollView, StyleSheet} from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { Avatar, ListItem, PricingCard } from "react-native-elements";
 import {logOut} from '../controller/loginController'
-import firebase from '../database/firebase';
+import fire from '../database/firebase';
+import firebase  from "firebase";
 
 const Home = (props) =>{
    
@@ -25,7 +26,7 @@ const Home = (props) =>{
     
     const getUserById = async(id) => {
         //finalmente, una consulta decente xD
-        const dbRef= firebase.db.collection("users").where("uid","==", id).get()
+        const dbRef= fire.db.collection("users").where("uid","==", id).get()
         .then(function(querySnapshot){
             querySnapshot.forEach(function(doc){
                 const user=doc.data();
@@ -47,7 +48,7 @@ const Home = (props) =>{
     
 
     useEffect(()=>{
-        getUserById(props.route.params.user_id);
+        getUserById(firebase.auth().currentUser.uid);
     },[])   
 
     return(
@@ -72,6 +73,13 @@ const Home = (props) =>{
             />
             </ListItem>
             </View>
+            {/* <View>
+                <TabScreen>
+
+                </TabScreen>
+
+
+            </View> */}
             <View style={styles.graphic}>
             <CircularProgress  
             radius={90}

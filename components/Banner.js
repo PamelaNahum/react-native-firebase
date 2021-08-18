@@ -80,6 +80,7 @@ class TabScreen extends React.Component {
       }
     }
     
+  export default TabScreen;
   
 
 

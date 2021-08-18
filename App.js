@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet} from 'react-native';
+import { StyleSheet,  Text, View, Image,TouchableOpacity} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import UsersList from './screens/UsersList';
 import CreateUserScreen from './screens/CreateUserScreen';
 import UserDetailsScreen from './screens/UserDetailsScreen';
@@ -9,8 +10,123 @@ import SignUp from './screens/SignUp';
 import PrincipalEjemplo from './screens/PrincipalEjemplo';
 import Home from './screens/Home';
 
+//revisar https://www.youtube.com/watch?v=xBmx2eaozck
+////https://www.youtube.com/watch?v=gPaBicMaib4 footer
+const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-function MyStack(props){
+
+
+
+
+const CustomTabBarButton=({children, onPress})=> {
+    return(
+    <TouchableOpacity
+    style={{ 
+        top:-30,
+        justifyContent: "center",
+        alignItems: 'center',
+        ...styles.shadow
+    }}
+    onPress={onPress}
+    >
+        <View style={{
+            width:70,
+            height:70,
+            borderRadius:35,
+            backgroundColor:'#009fe5'
+        }}
+        >{children}</View>
+    </TouchableOpacity>
+    )
+}
+
+const tabList=()=> {
+  return (
+    <Tab.Navigator
+        screenOptions={{
+            tabBarShowLabel:false,
+            tabBarStyle: {
+                position: 'absolute',
+                elevation:0,
+                backgroundColor:'#fff',
+                borderRadius:15,
+                height:80,
+                ...styles.shadow
+            },
+        }}>
+          <Tab.Screen name="Home" component={Home} options={{
+                tabBarIcon:({focused})=>(
+                    <View style={styles.view}>
+                        <Image
+                        source={require('./assets/pie-chart.png')}
+                        resizeMode="contain"
+                        style={styles.imagen}
+                        />
+                    </View>
+                )
+
+            }} />
+          <Tab.Screen name="UsersList" component={UsersList} options={{
+                tabBarIcon:({focused})=>(
+                    <View style={styles.view}>
+                        <Image
+                        source={require('./assets/home.png')}
+                        resizeMode="contain"
+                        style={styles.imagen}
+                        />
+                    </View>
+                )
+
+            }}/>
+          
+            
+            <Tab.Screen name="CreateUserScreen" component={CreateUserScreen} options={{
+                tabBarIcon:({focused})=>(
+                        <Image
+                        source={require('./assets/plus.png')}
+                        resizeMode="contain"
+                        style={{
+                            width:30,
+                            height:30,
+                        }}
+                        />
+                ),
+                tabBarButton:(props)=>(
+                    <CustomTabBarButton{...props}/>
+                )
+
+            }}/>
+            <Tab.Screen name="UserDetailsScreen" component={UserDetailsScreen} options={{
+                tabBarIcon:({focused})=>(
+                    <View style={styles.view}>
+                        <Image
+                        source={require('./assets/user.png')}
+                        resizeMode="contain"
+                        style={styles.imagen}
+                        />
+                    </View>
+                )
+
+            }}/>
+            <Tab.Screen name="SignUp" component={SignUp}
+            options={{
+                tabBarIcon:({focused})=>(
+                    <View style={styles.view}>
+                        <Image
+                        source={require('./assets/badge.png')}
+                        resizeMode="contain"
+                        style={styles.imagen}
+                        />
+                    </View>
+                )
+
+            }}/>
+        </Tab.Navigator>
+  )
+};
+
+
+const MyStack=(props)=>{
   /*los stack siempre se ponen en el orden en el que van a aparecer
   siempre ponerlos con mayuscula en la carpeta screen
   video de apoyo para el próximo proyecto https://www.youtube.com/watch?v=VE7J0SA1PRQ
@@ -20,62 +136,34 @@ function MyStack(props){
  /*para ver headers mas bellos https://dev.to/netguru/stickyheader-js-beautiful-headers-in-react-native-5ac1
  https://cloudstack.ninja/chamcham/overlapping-react-navigation-header-in-react-native-app/ */
   return(
-    <Stack.Navigator
-    screenOptions={{
-      headerBackTitleVisible: false,
-    }}>
-      <Stack.Screen 
-      name="Login" component={PrincipalEjemplo} 
-      options={{ headerTitle: 'Bienvenido', 
-      headerTintColor: '#4f7d67', 
-      headerStyle:{backgroundColor: '#fff'}
-      }}/>
-        
-      <Stack.Screen 
-      name="CreateUserScreen" component={CreateUserScreen} 
-      options={{ headerTitle: 'Crear Usuario', 
-      headerTintColor: '#4f7d67', 
-      headerStyle:{backgroundColor: '#fff'}}}/>
-
-      <Stack.Screen 
-      name="UsersList" component={UsersList}
-      options={{ headerTitle: 'Lista de Usuarios', 
-      headerTintColor: '#4f7d67', 
-      headerStyle:{backgroundColor: '#fff'}}}/>  
+    <Stack.Navigator>
       
       <Stack.Screen 
-      name="UserDetailsScreen" component={UserDetailsScreen}
-      options={{ headerTitle: "Detalles de usuario", 
-      headerTintColor: '#4f7d67', 
-      headerStyle:{backgroundColor: '#fff'}}}/>
+      name="Login" component={PrincipalEjemplo} />
 
       <Stack.Screen 
-      name="SignUp" component={SignUp}
-      options={{ headerTitle: "Registrate", 
-      headerTintColor: '#4f7d67', 
-      headerStyle:{backgroundColor: '#fff'}}}/>
-
-      <Stack.Screen 
-      name="Home" component={Home}
+      name="Home" component={tabList}
       options={{ headerTitle: "Bienvenido", 
       headerTintColor: '#4f7d67', 
-      headerStyle:{backgroundColor: '#fff'}}}/>
+      headerStyle:{backgroundColor: '#fff'},
+      headerBackImage:null,
+      }}
+      />
+       
 
     </Stack.Navigator>
+    
 
   )
 
 }
 export default function App() {
   return (   
-    
     <NavigationContainer>
-      
-      <MyStack>
+   
+      <MyStack></MyStack>
+      </NavigationContainer>
 
-      </MyStack>
-
-    </NavigationContainer>
     
   );
 }
@@ -91,4 +179,28 @@ const styles = StyleSheet.create({
     marginRight: 20,
     color:'black',
   },
+  shadow:{
+    shadowColor: '#7F5DF0',
+    shadowOffset:{
+        width:0, 
+        height:10,
+    },
+    shadowOpacity:0.25,  
+    shadowRadius:3.5,  
+    elevation:5,
+},
+view:{
+    alignItems:'center',
+    justifyContent: 'center',
+    top:10
+
+},
+imagen:{
+    width: 25,
+    height:25,
+
+},
+text:{
+    fontSize:12
+}
 });
