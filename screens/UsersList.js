@@ -41,7 +41,7 @@ const UsersList = (props) =>{
                         y modificarlos en otra vista, ademas le envío como parámetro el id del usuario
                         seleccionado*/
                         key={user.id} bottomDivider onPress={()=>{
-                            props.navigation.navigate('UserDetailsScreen',{
+                            props.navigation.navigate('Informacion del usuario',{
                                 user_id:user.id
                             })
                         }}
@@ -55,7 +55,7 @@ const UsersList = (props) =>{
                     )
                 })
             }
-            <SubmitButton onPress={()=>props.navigation.navigate("CreateUserScreen")}>Atras</SubmitButton>
+            <SubmitButton onPress={()=>props.navigation.navigate("Agregar Nueva Actividad")}>Atras</SubmitButton>
         </ScrollView>
         
     )

@@ -1,20 +1,21 @@
 import React from 'react';
-import { StyleSheet,  Text, View, Image,TouchableOpacity} from 'react-native';
+import { StyleSheet,  Text, View, Image,TouchableOpacity, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import UsersList from './screens/UsersList';
-import CreateUserScreen from './screens/CreateUserScreen';
+import CertificacionScreen from './screens/CertificacionScreen';
 import UserDetailsScreen from './screens/UserDetailsScreen';
-import SignUp from './screens/SignUp';
 import PrincipalEjemplo from './screens/PrincipalEjemplo';
-import Home from './screens/Home';
+import Home from './screens/Homes';
+import CreateActivityScreen from './screens/CreateActivityScreen';
 
-//revisar https://www.youtube.com/watch?v=xBmx2eaozck
-////https://www.youtube.com/watch?v=gPaBicMaib4 footer
+//casi toda la app xD https://www.youtube.com/watch?v=xBmx2eaozck
+////https://www.youtube.com/watch?v=gPaBicMaib4 tab.navigator
+
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
 
 
 
@@ -53,9 +54,10 @@ const tabList=()=> {
                 height:80,
                 ...styles.shadow
             },
+            headerShown:false,
         }}>
           <Tab.Screen name="Home" component={Home} options={{
-                tabBarIcon:({focused})=>(
+                tabBarIcon:()=>(
                     <View style={styles.view}>
                         <Image
                         source={require('./assets/pie-chart.png')}
@@ -67,7 +69,7 @@ const tabList=()=> {
 
             }} />
           <Tab.Screen name="UsersList" component={UsersList} options={{
-                tabBarIcon:({focused})=>(
+                tabBarIcon:()=>(
                     <View style={styles.view}>
                         <Image
                         source={require('./assets/home.png')}
@@ -80,8 +82,9 @@ const tabList=()=> {
             }}/>
           
             
-            <Tab.Screen name="CreateUserScreen" component={CreateUserScreen} options={{
-                tabBarIcon:({focused})=>(
+            <Tab.Screen name="Agregar Nueva Actividad" component={CreateActivityScreen} options={{
+                headerShown:true,
+                tabBarIcon:({})=>(
                         <Image
                         source={require('./assets/plus.png')}
                         resizeMode="contain"
@@ -96,8 +99,9 @@ const tabList=()=> {
                 )
 
             }}/>
-            <Tab.Screen name="UserDetailsScreen" component={UserDetailsScreen} options={{
-                tabBarIcon:({focused})=>(
+            <Tab.Screen name="Informacion del usuario" component={UserDetailsScreen} options={{
+                headerShown:true,
+                tabBarIcon:()=>(
                     <View style={styles.view}>
                         <Image
                         source={require('./assets/user.png')}
@@ -107,10 +111,10 @@ const tabList=()=> {
                     </View>
                 )
 
-            }}/>
-            <Tab.Screen name="SignUp" component={SignUp}
+            }} />
+            <Tab.Screen name="certificacion" component={CertificacionScreen}
             options={{
-                tabBarIcon:({focused})=>(
+                tabBarIcon:()=>(
                     <View style={styles.view}>
                         <Image
                         source={require('./assets/badge.png')}
@@ -133,8 +137,7 @@ const MyStack=(props)=>{
   */
  /*para ver el tema de las notificaciones https://www.youtube.com/watch?v=-2zoM_QWGY0
  ahora me da paja asique será mañana xDDDD */
- /*para ver headers mas bellos https://dev.to/netguru/stickyheader-js-beautiful-headers-in-react-native-5ac1
- https://cloudstack.ninja/chamcham/overlapping-react-navigation-header-in-react-native-app/ */
+ 
   return(
     <Stack.Navigator>
       
@@ -142,27 +145,25 @@ const MyStack=(props)=>{
       name="Login" component={PrincipalEjemplo} />
 
       <Stack.Screen 
-      name="Home" component={tabList}
-      options={{ headerTitle: "Bienvenido", 
-      headerTintColor: '#4f7d67', 
-      headerStyle:{backgroundColor: '#fff'},
-      headerBackImage:null,
-      }}
+      name="Home" component={tabList} 
+      options={{ headerShown:false}}
       />
        
 
     </Stack.Navigator>
+  
     
 
-  )
+    )
 
 }
 export default function App() {
   return (   
-    <NavigationContainer>
+      <NavigationContainer>
    
       <MyStack></MyStack>
       </NavigationContainer>
+      
 
     
   );

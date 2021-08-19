@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import { View, TextInput, ScrollView, StyleSheet, ActivityIndicator, Alert  } from 'react-native';
+import { View, TextInput, ScrollView, StyleSheet, ActivityIndicator, Alert, Text  } from 'react-native';
 import { AceptButton, DeleteButton } from '../components';
-import firebase from '../database/firebase';
+import fire from '../database/firebase';
+import firebase from "firebase";
 import CircularProgress from 'react-native-circular-progress-indicator'
 
 const UserDetailsScreen = (props) =>{
@@ -26,19 +27,26 @@ const UserDetailsScreen = (props) =>{
 
     const getUserById = async(id) => {
         //aqui yo recibo el id que envíe como parámetro en la vista anterior
-        const dbRef= firebase.db.collection("users").doc(id)
-        const doc = await dbRef.get();
-        const user =doc.data();
-        //aqui yo ya comienzo a actualizar al usuario
-        setUser({
-            ...user,
-            id:doc.id,
-        });
+        const dbRef = fire.db.collection("users").where("uid", "==", id).get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    const user = doc.data();
+                    setUser({
+                        ...user,
+                        id: doc.id,
+                    });
+                })
+
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+
         setLoading(false)
     };
 
     useEffect(()=>{
-        getUserById(props.route.params.user_id);
+        getUserById(firebase.auth().currentUser.uid);
     },[])
 
     const handleChangeText = (name, value) =>{
@@ -86,6 +94,7 @@ const UserDetailsScreen = (props) =>{
         //cuada parámetro que logro obtener de lo de arriba se lo asigno a un cuadro de texto
         <ScrollView style={styles.container}>
             <View style={styles.inputGroup}> 
+            <Text style={styles.text}>Nombre</Text>
                 <TextInput 
                 placeholder="Nombre de usuario"
                 value={user.name}
@@ -93,6 +102,7 @@ const UserDetailsScreen = (props) =>{
                 />
             </View>
             <View style={styles.inputGroup}>
+            <Text style={styles.text}>Correo</Text>
                 <TextInput 
                 placeholder="Correo"
                 value={user.correo}
@@ -100,26 +110,16 @@ const UserDetailsScreen = (props) =>{
                 />
             </View>
             <View style={styles.inputGroup}>
+                <Text style={styles.text}>Telefono</Text>
                 <TextInput 
                 placeholder="Telefono"
                 value={user.telefono}
                 onChangeText={(value)=>handleChangeText('telefono', value)}/>
             </View>
             
-            <View style={{alignItems:'center'}}>
-            <CircularProgress  
-            radius={90}
-            value={parseInt(user.numCont)}
-            textColor='black'
-            fontSize={20}
-            valueSuffix={'%'}
-            inActiveStrokeColor={'#27b871'}
-            inActiveStrokeOpacity={0.2}
-            duration={3000}
-            />        
-        </View>
+           
+            
             <AceptButton onPress={()=> modificarUsuario()}>Guardar Usuario</AceptButton>
-            <DeleteButton onPress={()=> confEliminar()}>Eliminar Usuario</DeleteButton>
         </ScrollView>
         
     )
@@ -128,7 +128,8 @@ const UserDetailsScreen = (props) =>{
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        padding:35
+        padding:35,
+        marginTop:10
     },
     inputGroup:{
         flex:1,
@@ -137,6 +138,11 @@ const styles = StyleSheet.create({
         borderBottomWidth:1,
         borderBottomColor:'#cccccc',
         marginTop:10,
-    }
+    },
+    text: {
+        fontSize: 20,
+        color: 'green',
+        marginBottom:10
+    },
 })
 export default UserDetailsScreen

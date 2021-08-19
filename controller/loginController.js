@@ -13,9 +13,7 @@ export function login (email, password, props){
             const user = firebase.auth().currentUser;
 
             if (user) {
-                props.navigation.navigate('Home',{
-                    user_id:user.uid,  user_correo:user.email
-                })
+                props.navigation.navigate('Home')
             }
         })
         .catch(()=>{
@@ -30,7 +28,7 @@ export function signUp (email, password, props){
         const user = firebase.auth().currentUser;
         console.log(user.uid)
         if (user) {
-            props.navigation.navigate('CreateUserScreen',{
+            props.navigation.navigate('Agregar Nueva Actividad',{
                 user_id:user.uid, user_correo:user.email
             })
         }
