@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { View, TextInput, ScrollView, StyleSheet, ActivityIndicator, Alert, Text  } from 'react-native';
-import { AceptButton, DeleteButton } from '../components';
+import { AceptButton} from '../components';
 import fire from '../database/firebase';
 import firebase from "firebase";
-import CircularProgress from 'react-native-circular-progress-indicator'
 
 const UserDetailsScreen = (props) =>{
     
@@ -15,6 +14,7 @@ const UserDetailsScreen = (props) =>{
         correo:"",
         telefono:"",
         numCont:0,
+        uid:""
 
     }
     //con esto se hace un "cargando"
@@ -60,15 +60,20 @@ const UserDetailsScreen = (props) =>{
     };
     //en esta fucion genero el dele en la base para modificar usuarios
     const modificarUsuario = async()=>{
-        const dbRef = firebase.db.collection('users').doc(user.id);
+        const dbRef = fire.db.collection('users').doc(user.id);
         await dbRef.set({
             name: user.name,
             correo: user.correo,
             telefono: user.telefono,
-            numCont: user.numCont
+            numCont: user.numCont,
+            uid:firebase.auth().currentUser.uid,
+        })
+        const u = firebase.auth().currentUser;
+        u.updateEmail(user.correo).then(()=>{
+            console.log("uwu")
         })
         setUser(objetoInicial)
-        props.navigation.navigate('UsersList')
+        props.navigation.navigate('Home')
     }
     
     const confEliminar = () => {

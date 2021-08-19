@@ -1,6 +1,6 @@
 
 import React, { useState} from 'react';
-import {View, TextInput, ScrollView, StyleSheet, Alert} from 'react-native'; 
+import {View, TextInput, ScrollView, StyleSheet} from 'react-native'; 
 import { AceptButton, SubmitButton  } from '../components';
 import {login} from '../controller/loginController'
 

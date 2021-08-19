@@ -6,8 +6,6 @@ import firebase from "firebase";
 import DatePicker from 'react-native-datepicker'
 import moment from "moment";
 
-import { exp } from 'react-native-reanimated';
-
 const CreateActivityScreen = (props) =>{
 
     //se crea una funcion que va guardando el estado del objeto
