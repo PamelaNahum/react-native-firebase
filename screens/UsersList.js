@@ -1,22 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import firebase from '../database/firebase';
 import { ListItem } from 'react-native-elements';
 import { SubmitButton } from '../components';
 
 
-const UsersList = (props) =>{
+const UsersList = (props) => {
     //aqui se rea la lista que va a guardar los datos que llegen de la base
 
-    const [users, setUsers]= useState([]);
+    const [users, setUsers] = useState([]);
 
     //Con esto hago la consulta a la base y lleno la lista con los datos
 
-    useEffect(()=>{
-        firebase.db.collection("users").onSnapshot((querySnapshot)=>{
-            const users =[];
-            querySnapshot.docs.forEach((doc)=>{
-                const {name, correo, telefono} = doc.data()
+    useEffect(() => {
+        firebase.db.collection("users").onSnapshot((querySnapshot) => {
+            const users = [];
+            querySnapshot.docs.forEach((doc) => {
+                const { name, correo, telefono } = doc.data()
                 users.push({
                     id: doc.id,
                     name,
@@ -26,27 +26,27 @@ const UsersList = (props) =>{
             });
             setUsers(users);
         });
-        
-    },[]);
 
-    return(
+    }, []);
+
+    return (
         <ScrollView>
-                       
+
             {
                 users.map(user => {
-                    return(
+                    return (
                         <ListItem
-                        /*aqui utilizo un boton tipo "flechita" para poder ingresa a cada usuario
-                        la idea es que despues pueda tomar los datos
-                        y modificarlos en otra vista, ademas le envío como parámetro el id del usuario
-                        seleccionado*/
-                        key={user.id} bottomDivider onPress={()=>{
-                            props.navigation.navigate('Informacion del usuario',{
-                                user_id:user.id
-                            })
-                        }}
+                            /*aqui utilizo un boton tipo "flechita" para poder ingresa a cada usuario
+                            la idea es que despues pueda tomar los datos
+                            y modificarlos en otra vista, ademas le envío como parámetro el id del usuario
+                            seleccionado*/
+                            key={user.id} bottomDivider onPress={() => {
+                                props.navigation.navigate('Informacion del usuario', {
+                                    user_id: user.id
+                                })
+                            }}
                         >
-                            <ListItem.Chevron/>
+                            <ListItem.Chevron />
                             <ListItem.Content>
                                 <ListItem.Title>{user.name}</ListItem.Title>
                                 <ListItem.Subtitle>{user.correo}</ListItem.Subtitle>
@@ -55,9 +55,9 @@ const UsersList = (props) =>{
                     )
                 })
             }
-            <SubmitButton onPress={()=>props.navigation.navigate("Agregar Nueva Actividad")}>Atras</SubmitButton>
+            <SubmitButton onPress={() => props.navigation.navigate("Agregar Nueva Actividad")}>Atras</SubmitButton>
         </ScrollView>
-        
+
     )
 }
 
