@@ -5,7 +5,7 @@ import { Avatar, ListItem, PricingCard } from "react-native-elements";
 import { logOut } from '../controller/loginController'
 import fire from '../database/firebase';
 import firebase from "firebase";
-import { COLORS, SIZES, FONTS, icons, images } from '../constants';
+import { images } from '../constants';
 import { FlatList } from 'react-native';
 
 
@@ -73,43 +73,30 @@ const Home = (props) => {
         })
     }, [])
 
-    const Item = ({nom_actividad, fecha}) => (
+    const Item = ({ nom_actividad, fecha }) => (
         <View style={styles.item}>
             <Text style={styles.text}>{nom_actividad}</Text>
             <Text style={styles.fecha}>{fecha}</Text>
         </View>
     );
-    const renderItem = ({item}) =>(
+    const renderItem = ({ item }) => (
         <TouchableOpacity
-        style={{
-            width:180,
-            paddingVertical: SIZES.padding,
-            paddingHorizontal: SIZES.padding,
-            marginRight:SIZES.radius,
-            marginLeft:10,
-            borderRadius: 10,
-            backgroundColor:COLORS.white
+            style={styles.touchable}>
+            <View style={{ flexDirection: 'row' }}>
+                <View>
+                    <Image
+                        source={require('../assets/icons/star.png')}
+                        resizeMode="cover"
+                        style={styles.img} />
+                </View>
+                <View style={{ marginLeft: 8 }}>
+                    <Item nom_actividad={item.nom_actividad} fecha={item.fecha} />
+                </View>
 
-        }}>
-        <View style={{flexDirection:'row'}}>
-            <View>
-                <Image
-                source={require('../assets/icons/star.png')}
-                resizeMode="cover"
-                style={{
-                    marginTop:5,
-                    width:20,
-                    height:20,                
-                }}/>
             </View>
-            <View style={{marginLeft: SIZES.base}}>
-                <Item nom_actividad={item.nom_actividad} fecha={item.fecha}/>
-            </View>
-        
-        </View>
-          
+
         </TouchableOpacity>
-        
+
     )
 
 
@@ -126,25 +113,23 @@ const Home = (props) => {
                     resizeMode="cover"
                     style={{ flex: 1, alignItems: 'center' }}>
                     <View>
-                        <Text style={{
-                            color: COLORS.white, ...FONTS.h2,
-                            marginTop: 70, marginBottom: 30
-                        }}>
+                        <Text style={styles.title}>
                             Hola, {user.name}</Text>
 
                     </View>
                     <View style={{ position: 'absolute', bottom: "-40%" }}>
                         <View style={styles.graphic} >
-                            <Text style={{ color: COLORS.black, ...FONTS.h2, marginBottom: 10 }}>Su avance</Text>
+                            <Text style={{ color: 'black', fontSize: 22, lineHeight: 30, marginBottom: 10 }}>Su avance</Text>
                             <CircularProgress
                                 radius={90}
                                 value={parseInt(user.numCont)}
                                 textColor='black'
                                 fontSize={30}
                                 valueSuffix={'%'}
-                                inActiveStrokeColor={'#27b871'}
+                                inActiveStrokeColor={'#02709f'}
                                 inActiveStrokeOpacity={0.2}
                                 duration={3000}
+                                activeStrokeColor={'#04e3ad'}
                             />
                         </View>
 
@@ -158,6 +143,32 @@ const Home = (props) => {
         )
     }
 
+    function renderNotice(){
+        return(
+            <View
+            style={{ 
+                marginTop:24,
+                marginHorizontal: 24,
+                padding: 20,
+                borderRadius:12,
+                backgroundColor: '#04e3ad',
+                ...styles.shadow
+
+            }}>
+                <Text style={{fontSize:16}}>
+                    Actividades próximas
+                </Text>
+
+                <Text style={{fontSize:14, color:'black'}} >
+                    la idea es listar actividades proximas quedeba hacer
+                </Text>
+
+            </View>
+            
+        )
+
+    }
+
     return (
         <ScrollView>
 
@@ -167,15 +178,24 @@ const Home = (props) => {
             </View>
 
 
-        <ScrollView>
+            <ScrollView >
+                
 
-            <FlatList
-                data={acts}
-                keyExtractor={item => item.id}
-                renderItem={renderItem}
-                horizontal/>
+                <FlatList
+                    
+                    data={acts}
+                    keyExtractor={item => item.id}
+                    renderItem={renderItem}
+                    horizontal />
+                
 
-        </ScrollView>
+            </ScrollView>
+
+            <View style={{ flex: 1, paddingBottom: 130 }}>
+                {renderNotice()}
+                {renderNotice()}
+                {renderNotice()}
+            </View>
 
         </ScrollView >
 
@@ -197,7 +217,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 20,
-        color: 'green',
+        color: '#02be90',
     },
     graphic: {
         alignItems: 'center',
@@ -208,8 +228,6 @@ const styles = StyleSheet.create({
         elevation: 7,
         width: 300,
         height: 230
-
-
     },
     card: {
         flex: 1,
@@ -221,7 +239,11 @@ const styles = StyleSheet.create({
         width: 120
     },
     title: {
-        fontSize: 12
+        color: '#FFF',
+        fontSize: 22,
+        lineHeight: 30,
+        marginTop: 70,
+        marginBottom: 30
     },
     shadow: {
         shadowColor: "#000",
@@ -233,6 +255,20 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
 
         elevation: 8,
+    },
+    touchable: {
+        width: 180,
+        paddingVertical: 24,
+        paddingHorizontal: 24,
+        marginRight: 12,
+        marginLeft: 10,
+        borderRadius: 10,
+        backgroundColor: '#fff'
+    },
+    img: {
+        marginTop: 5,
+        width: 20,
+        height: 20,
     }
 })
 export default Home

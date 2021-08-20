@@ -13,7 +13,7 @@ export function login(email, password, props) {
             const user = firebase.auth().currentUser;
 
             if (user) {
-                props.navigation.navigate('Home')
+                props.navigation.navigate('app')
             }
         })
         .catch(() => {

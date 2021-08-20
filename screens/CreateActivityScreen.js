@@ -1,12 +1,30 @@
 import React, { useState } from 'react';
-import { View, TextInput, ScrollView, StyleSheet, Text } from 'react-native';
-import { AceptButton, SubmitButton } from '../components';
+import { View, TextInput, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { SubmitButton } from '../components';
 import fire from '../database/firebase';
 import firebase from "firebase";
-import DatePicker from 'react-native-datepicker'
+import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from "moment";
 
 const CreateActivityScreen = (props) => {
+    const [show, setShow] = useState(false);
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+    const showDatepicker = () => {
+        showMode('date');
+    };
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+        (date) =>
+            handleChangeText('fecha', date)
+            console.log(date)
+    };
 
     //se crea una funcion que va guardando el estado del objeto
 
@@ -34,8 +52,9 @@ const CreateActivityScreen = (props) => {
             await fire.db.collection('actividades').add({
                 id_user: firebase.auth().currentUser.uid,
                 nom_actividad: state.nom_actividad,
-                fecha: state.fecha
+                fecha: moment(date.toLocaleString('es-CL')).format('DD/MM/YYYY')
             })
+            console.log(moment(date.toLocaleString('es-CL')).format('DD-MM-YYYY'))
             props.navigation.navigate("Home");
 
         }
@@ -57,11 +76,29 @@ const CreateActivityScreen = (props) => {
                     onChangeText={(value) => handleChangeText('nom_actividad', value)}
                 />
             </View>
+            <View>
+                <TouchableOpacity onPress={showDatepicker}>
+                    <Text style={styles.title}>{moment().format('DD/MM/YYYY')}</Text>
+                </TouchableOpacity>
+            </View>
+            {show && (
+                <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode={mode}
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
 
-            <View style={styles.inputGroup}>
+
+                />
+            )}
+            {/* <View style={styles.inputGroup}>
                 <Text style={styles.text}>Fecha</Text>
-                <DatePicker
+                <DateTimePicker
                     showIcon={false}
+                    value={date}
+                    display="default"
                     androidMode="spinner"
                     style={{ width: 340 }}
                     mode="date"
@@ -73,7 +110,7 @@ const CreateActivityScreen = (props) => {
 
                         )}
                 />
-            </View>
+            </View> */}
             <View>
                 <SubmitButton onPress={() => createNewAct()}>Crear Actividad</SubmitButton>
             </View>
@@ -99,7 +136,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 20,
-        color: 'green',
+        color: '#02be90',
         marginBottom: 10
     },
 

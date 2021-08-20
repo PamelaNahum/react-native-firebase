@@ -23,7 +23,7 @@ export default ({
   return (
     <View style={styles.wrapper}>
       {pressed ? (
-        <ActivityIndicator size="large" color="blue" />
+        <ActivityIndicator size="large" color="#00b1ff" />
       ) : (
         <TouchableOpacity
           onPress={handlePress}
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 30,
-    backgroundColor: "#0276B2",
+    backgroundColor: "#00b1ff",
     paddingHorizontal: 40,
     paddingVertical: 10,
     justifyContent: "center",

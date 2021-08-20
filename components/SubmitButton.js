@@ -23,7 +23,7 @@ export default ({
   return (
     <View style={styles.wrapper}>
       {pressed ? (
-        <ActivityIndicator size="large" color="blue" />
+        <ActivityIndicator size="large" color="#009fe5" />
       ) : (
         <TouchableOpacity
           onPress={handlePress}

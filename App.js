@@ -48,13 +48,14 @@ const tabList = () => {
                 tabBarShowLabel: false,
                 tabBarStyle: {
                     position: 'absolute',
-                    elevation: 0,
                     backgroundColor: '#fff',
                     borderRadius: 15,
                     height: 80,
                     ...styles.shadow
+                    
                 },
                 headerShown: false,
+                tabBarHideOnKeyboard:true
             }}>
             <Tab.Screen name="Home" component={Home} options={{
                 tabBarIcon: () => (
@@ -145,7 +146,7 @@ const MyStack = (props) => {
                 name="Login" component={PrincipalEjemplo} />
 
             <Stack.Screen
-                name="Home" component={tabList}
+                name="app" component={tabList}
                 options={{ headerShown: false }}
             />
         </Stack.Navigator>
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
         color: 'black',
     },
     shadow: {
-        shadowColor: '#7F5DF0',
+        shadowColor: 'black',
         shadowOffset: {
             width: 0,
             height: 10,
