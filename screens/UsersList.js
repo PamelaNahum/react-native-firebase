@@ -77,14 +77,14 @@ const UsersList = () => {
                                 easeDurations={3000}
                                 labels={[
                                     {
-                                        name: user.numCont+' KG Co2 Emisión',
+                                        name: user.numCont+' KG Co2 Emitido',
                                         labelColor: '#3399FF',
                                         activeBarColor: '#3399FF',
                                         
                                     },
                                     
                                     {
-                                        name: user.numCont+' KG Co2 Compensación',
+                                        name: user.numCont+' KG Co2 Compensado',
                                         labelColor: '#33CC66',
                                         activeBarColor: '#33CC66',
                                     },

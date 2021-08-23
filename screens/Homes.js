@@ -84,7 +84,7 @@ const Home = () => {
                 <View>
                     <Image
                         source={require('../assets/icons/field.png')}
-                        resizeMode="cover"
+                        resizeMode="contain"
                         style={styles.img} />
                 </View>
                 <View style={{ marginLeft: 8 }}>
@@ -172,9 +172,9 @@ const Home = () => {
             </View>
 
 
-            <ScrollView >
+            
                 
-
+            <View>
                 <FlatList
                     
                     data={acts}
@@ -182,8 +182,7 @@ const Home = () => {
                     renderItem={renderItem}
                     horizontal />
                 
-
-            </ScrollView>
+            </View>
 
             <View style={{ flex: 1, paddingBottom: 130 }}>
                 {renderNotice()}
@@ -256,8 +255,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24,
         marginRight: 12,
         marginLeft: 10,
+        marginBottom:10,
         borderRadius: 10,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        elevation:4,
     },
     img: {
         marginTop: 2,

@@ -96,24 +96,6 @@ const CreateActivityScreen = (props) => {
 
                 />
             )}
-            {/* <View style={styles.inputGroup}>
-                <Text style={styles.text}>Fecha</Text>
-                <DateTimePicker
-                    showIcon={false}
-                    value={date}
-                    display="default"
-                    androidMode="spinner"
-                    style={{ width: 340 }}
-                    mode="date"
-                    placeholder="DD/MM/YYYY"
-                    format="DD/MM/YYYY"
-                    maxDate={moment().format('DD/MM/YYYY')}
-                    onDateChange={(value) =>
-                        handleChangeText('fecha', String(value)
-
-                        )}
-                />
-            </View> */}
             <View>
                 <SubmitButton onPress={() => createNewAct()}>Crear Actividad</SubmitButton>
             </View>

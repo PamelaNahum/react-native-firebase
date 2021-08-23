@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import {
-    Alert, Text, Modal, StyleSheet, Pressable
+    Text, Modal, StyleSheet, TouchableOpacity
 } from 'react-native';
 
 const CertificacionScreen = (props) => {
@@ -9,23 +9,18 @@ const CertificacionScreen = (props) => {
     
     return (
         
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={true}          
-        >
+        
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>Aún falta para poder solicitar la certificación</Text>
-              <Pressable
+              <TouchableOpacity
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => props.navigation.navigate("Home")}
               >
                 <Text style={styles.textStyle}>Entendido</Text>
-              </Pressable>
+              </TouchableOpacity>
             </View>
           </View>
-        </Modal>
     
 
     )
