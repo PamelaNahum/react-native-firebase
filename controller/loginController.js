@@ -17,7 +17,7 @@ export function login(email, password, props) {
             }
         })
         .catch(() => {
-            Alert.alert("Usuario inválido", "Revise sus datos")
+            Alert.alert("Usuario inválido", "Usuario o Contraseña incorrecta")
         })
 };
 //siguendo la misma lógica con esto debería ser para crear xD
@@ -27,20 +27,21 @@ export function signUp(email, password, props) {
         .then(() => {
             const user = firebase.auth().currentUser;
             if (user) {
-                props.navigation.navigate('Login')
+                props.navigation.navigate('CrearUsuario',
+                {user_id:user.uid, user_correo : user.email});
             }
 
 
 
         })
         .catch((error) => {
-            Alert.alert("Datos inválidos", "Debe ingresar todos los campos correctamente")
+            Alert.alert("Datos inválidos", "Revise los datos y vuelva a intentarlo")
             console.log(error)
         })
 
 };
 
-export function logOut(props) {
+export function logOut() {
     firebase.auth().
         signOut().then(()=> {
             console.log('hecho xD')

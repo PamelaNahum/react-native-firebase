@@ -10,6 +10,7 @@ import PrincipalEjemplo from './screens/PrincipalEjemplo';
 import Home from './screens/Homes';
 import CreateActivityScreen from './screens/CreateActivityScreen';
 import SignUp from './screens/SignUp'
+import CreateUserScreen from './screens/CreateUserScreen';
 
 //casi toda la app xD https://www.youtube.com/watch?v=xBmx2eaozck
 ////https://www.youtube.com/watch?v=gPaBicMaib4 tab.navigator
@@ -159,6 +160,9 @@ const MyStack = (props) => {
             />
             <Stack.Screen
                 name="SignUp" component={SignUp} />
+
+            <Stack.Screen
+                name="CrearUsuario" component={CreateUserScreen} />
         </Stack.Navigator>
 
 

@@ -10,6 +10,13 @@ const CreateActivityScreen = (props) => {
     const [show, setShow] = useState(false);
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
+    //se crea una funcion que va guardando el estado del objeto
+
+    const [state, setState] = useState({
+        id_user: "",
+        nom_actividad: "",
+        fecha: "",
+    });
     const showMode = (currentMode) => {
         setShow(true);
         setMode(currentMode);
@@ -24,21 +31,12 @@ const CreateActivityScreen = (props) => {
         (date) =>
             handleChangeText('fecha', date)
     };
-
-    //se crea una funcion que va guardando el estado del objeto
-
-    const [state, setState] = useState({
-        id_user: "",
-        nom_actividad: "",
-        fecha: "",
-    });
     /*En esta funcion se toman dos parametros y con ellos se le asiga 
     un valor al otro y con el ...state mantiene el estado de las demás
     variables de arriba */
     const handleChangeText = (name, value) => {
         setState({ ...state, [name]: value })
     }
-
     /*con esta funcion yo primero verifico los campos
     y luego conecto con la base, la base genera de forma automática
     la tabla con el collecttion e ingresa el usuario, buenardo la verdad XD */
@@ -56,10 +54,7 @@ const CreateActivityScreen = (props) => {
             props.navigation.navigate("Home");
 
         }
-
-
     }
-
     /*aqui yo retorno báscicamente el diseño, pero la
     magia se hace arriba, es como django pero en la screen se hace todo junto 
     (será seguro? :o) */

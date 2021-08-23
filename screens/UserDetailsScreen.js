@@ -6,8 +6,9 @@ import firebase from "firebase";
 import { logOut } from '../controller/loginController'
 
 const UserDetailsScreen = (props) => {
-
-
+    //con esto se hace un "cargando"
+    const [loading, setLoading] = useState(true)
+    
     //se creó esta funcion para no tener que escribir el objeto vacio mil veces
     const objetoInicial = {
         id: "",
@@ -18,18 +19,12 @@ const UserDetailsScreen = (props) => {
         uid: ""
 
     }
-    //con esto se hace un "cargando"
-    const [loading, setLoading] = useState(true)
-
     //con esto tomamos el usuario vacio y lo alistamos para tomar parámetros
     const [user, setUser] = useState(objetoInicial)
     const cerrarSesion = () => {
         logOut()
         props.navigation.navigate("Login")
     }
-
-
-
     const getUserById = async (id) => {
         //aqui yo recibo el id que envíe como parámetro en la vista anterior
         const dbRef = fire.db.collection("users").where("uid", "==", id).get()
@@ -63,6 +58,14 @@ const UserDetailsScreen = (props) => {
     //     dbRef.delete();
     //     props.navigation.navigate('UsersList')
     // };
+    
+    // const confEliminar = () => {
+    //     Alert.alert("Eliminar Usuario", "Está seguro que desea eliminar?", [
+    //         { text: 'Yes', onPress: () => eliminarUsuario() },
+    //         { text: 'No', }
+    //     ])
+    // }
+
     //en esta fucion genero el dele en la base para modificar usuarios
     const modificarUsuario = async () => {
         const dbRef = fire.db.collection('users').doc(user.id);
@@ -81,14 +84,6 @@ const UserDetailsScreen = (props) => {
         props.navigation.navigate('Home')
     }
 
-    // const confEliminar = () => {
-    //     Alert.alert("Eliminar Usuario", "Está seguro que desea eliminar?", [
-    //         { text: 'Yes', onPress: () => eliminarUsuario() },
-    //         { text: 'No', }
-    //     ])
-    // }
-
-
     if (loading) {
         return (
             <View>
@@ -96,10 +91,6 @@ const UserDetailsScreen = (props) => {
             </View>
         )
     };
-
-
-
-
     return (
         //cuada parámetro que logro obtener de lo de arriba se lo asigno a un cuadro de texto
         <ScrollView style={styles.container}>

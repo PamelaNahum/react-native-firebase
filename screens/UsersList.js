@@ -21,7 +21,6 @@ const UsersList = () => {
     const [loading, setLoading] = useState(true);
 
     const getUserById = async (id) => {
-        //aqui yo recibo el id que envíe como parámetro en la vista anterior
         const dbRef = fire.db.collection("users").where("uid", "==", id).get()
             .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
@@ -69,7 +68,7 @@ const UsersList = () => {
                                 //value for Speedometer
                                 size={200}
                                 //Size of Speedometer
-                                minValue={0}
+                                minValue={-100}
                                 //Min value for Speedometer
                                 maxValue={100}
                                 //Max value for Speedometer
@@ -78,28 +77,22 @@ const UsersList = () => {
                                 easeDurations={3000}
                                 labels={[
                                     {
-                                        name: 'Low Risk',
+                                        name: user.numCont+' KG Co2 Emisión',
                                         labelColor: '#3399FF',
                                         activeBarColor: '#3399FF',
+                                        
                                     },
+                                    
                                     {
-                                        name: 'Medium Risk',
-                                        labelColor: '#33CCCC',
-                                        activeBarColor: '#33CCCC',
-                                    },
-                                    {
-                                        name: 'High Risk',
-                                        labelColor: '#00FF66',
-                                        activeBarColor: '#00FF66',
+                                        name: user.numCont+' KG Co2 Compensación',
+                                        labelColor: '#33CC66',
+                                        activeBarColor: '#33CC66',
                                     },
                                 ]}
                                
                             //Labels for the different steps of Speedometer
                             />
                         </View>
-
-
-
                     </View>
 
 

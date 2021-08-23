@@ -39,7 +39,7 @@ const SignUp = (props) =>{
             <SubmitButton onPress={()=> registrarse()}>Registrate</SubmitButton>
             </View>
             <View> 
-            <AceptButton onPress={()=>props.navigation.navigate("Login")}>Volver</AceptButton>
+            <AceptButton onPress={()=>props.navigation.navigate("CrearUsuario")}>Volver</AceptButton>
             </View>          
             
 

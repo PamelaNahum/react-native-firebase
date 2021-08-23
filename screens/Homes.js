@@ -83,7 +83,7 @@ const Home = () => {
             <View style={{ flexDirection: 'row' }}>
                 <View>
                     <Image
-                        source={require('../assets/icons/star.png')}
+                        source={require('../assets/icons/field.png')}
                         resizeMode="cover"
                         style={styles.img} />
                 </View>
@@ -96,7 +96,6 @@ const Home = () => {
         </TouchableOpacity>
 
     )
-
 
 
     function renderHeader() {
@@ -130,9 +129,6 @@ const Home = () => {
                                 activeStrokeColor={'#04e3ad'}
                             />
                         </View>
-
-
-
                     </View>
 
 
@@ -264,9 +260,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     img: {
-        marginTop: 5,
-        width: 20,
-        height: 20,
+        marginTop: 2,
+        marginLeft: -15,
+        width: 30,
+        height: 30,
     }
 })
 export default Home
