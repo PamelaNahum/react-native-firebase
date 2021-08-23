@@ -35,7 +35,8 @@ const CustomTabBarButton = ({ children, onPress }) => {
                 width: 70,
                 height: 70,
                 borderRadius: 35,
-                backgroundColor: '#2196f3'
+                backgroundColor: '#2196f3',
+                elevation:3
             }}
             >{children}</View>
         </TouchableOpacity>
@@ -50,7 +51,6 @@ const tabList = () => {
                 tabBarStyle: {
                     position: 'absolute',
                     backgroundColor: '#fff',
-                    borderRadius: 15,
                     height: 80,
                     ...styles.shadow
                     
@@ -86,6 +86,10 @@ const tabList = () => {
 
             <Tab.Screen name="Agregar Nueva Actividad" component={CreateActivityScreen} options={{
                 headerShown: true,
+                headerStyle:{
+                    backgroundColor:'#33CCCC'
+                    
+                },
                 tabBarIcon: ({ }) => (
                     <Image
                         source={require('./assets/plus.png')}
@@ -103,6 +107,9 @@ const tabList = () => {
             }} />
             <Tab.Screen name="Informacion del usuario" component={UserDetailsScreen} options={{
                 headerShown: true,
+                headerStyle:{
+                    backgroundColor:'#33CCCC'
+                },
                 tabBarIcon: () => (
                     <View style={styles.view}>
                         <Image
@@ -195,12 +202,13 @@ const styles = StyleSheet.create({
     view: {
         alignItems: 'center',
         justifyContent: 'center',
-        top: 10
+        top: 10,
 
     },
     imagen: {
         width: 25,
         height: 25,
+        
 
     },
     text: {
