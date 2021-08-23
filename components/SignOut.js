@@ -9,7 +9,6 @@ export default () => {
     firebase.auth().signOut().then(() => {
       const user = firebase.auth().currentUser;
       if (user === null) {
-        console.log('xd')
         navigate('login')
       }
     })

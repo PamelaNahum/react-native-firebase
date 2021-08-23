@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, StyleSheet, Image, ImageBackground, Text, TouchableOpacity, ActionSheetIOS } from 'react-native';
+import { View, ScrollView, StyleSheet, Image, ImageBackground, Text, TouchableOpacity } from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
-import { Avatar, ListItem, PricingCard } from "react-native-elements";
-import { logOut } from '../controller/loginController'
 import fire from '../database/firebase';
 import firebase from "firebase";
 import { images } from '../constants';
 import { FlatList } from 'react-native';
 
 
-const Home = (props) => {
+const Home = () => {
 
 
     //se creó esta funcion para no tener que escribir el objeto vacio mil veces
@@ -160,7 +158,7 @@ const Home = (props) => {
                 </Text>
 
                 <Text style={{fontSize:14, color:'black'}} >
-                    la idea es listar actividades proximas quedeba hacer
+                    la idea es listar actividades proximas por hacer
                 </Text>
 
             </View>

@@ -23,7 +23,6 @@ const CreateActivityScreen = (props) => {
         setDate(currentDate);
         (date) =>
             handleChangeText('fecha', date)
-            console.log(date)
     };
 
     //se crea una funcion que va guardando el estado del objeto

@@ -26,11 +26,8 @@ export function signUp(email, password, props) {
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
             const user = firebase.auth().currentUser;
-            console.log(user.uid)
             if (user) {
-                props.navigation.navigate('Agregar Nueva Actividad', {
-                    user_id: user.uid, user_correo: user.email
-                })
+                props.navigation.navigate('Login')
             }
 
 
@@ -45,8 +42,8 @@ export function signUp(email, password, props) {
 
 export function logOut(props) {
     firebase.auth().
-        signOut().then(function () {
-            props.navigation.navigate('Login')
+        signOut().then(()=> {
+            console.log('hecho xD')
         })
 
 };

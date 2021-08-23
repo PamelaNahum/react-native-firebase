@@ -25,6 +25,7 @@ const UserDetailsScreen = (props) => {
     const [user, setUser] = useState(objetoInicial)
     const cerrarSesion = () => {
         logOut()
+        props.navigation.navigate("Login")
     }
 
 
@@ -129,7 +130,7 @@ const UserDetailsScreen = (props) => {
 
 
             <AceptButton onPress={() => modificarUsuario()}>Guardar Usuario</AceptButton>
-            <DeleteButton >Cerrar Sesión</DeleteButton>
+            <DeleteButton onPress={() => cerrarSesion()}>Cerrar Sesión</DeleteButton>
         </ScrollView>
 
     )

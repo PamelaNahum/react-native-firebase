@@ -9,6 +9,7 @@ import UserDetailsScreen from './screens/UserDetailsScreen';
 import PrincipalEjemplo from './screens/PrincipalEjemplo';
 import Home from './screens/Homes';
 import CreateActivityScreen from './screens/CreateActivityScreen';
+import SignUp from './screens/SignUp'
 
 //casi toda la app xD https://www.youtube.com/watch?v=xBmx2eaozck
 ////https://www.youtube.com/watch?v=gPaBicMaib4 tab.navigator
@@ -34,7 +35,7 @@ const CustomTabBarButton = ({ children, onPress }) => {
                 width: 70,
                 height: 70,
                 borderRadius: 35,
-                backgroundColor: '#00b1ff'
+                backgroundColor: '#2196f3'
             }}
             >{children}</View>
         </TouchableOpacity>
@@ -149,6 +150,8 @@ const MyStack = (props) => {
                 name="app" component={tabList}
                 options={{ headerShown: false }}
             />
+            <Stack.Screen
+                name="SignUp" component={SignUp} />
         </Stack.Navigator>
 
 

@@ -6,7 +6,7 @@ import firebase from "firebase";
 import RNSpeedometer from 'react-native-speedometer'
 
 
-const UsersList = (props) => {
+const UsersList = () => {
     //aqui se rea la lista que va a guardar los datos que llegen de la base
     const objetoInicial = {
         uid: "",
