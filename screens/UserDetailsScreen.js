@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, TextInput, ScrollView, StyleSheet, ActivityIndicator, Alert, Text } from 'react-native';
-import { AceptButton } from '../components';
+import { AceptButton, DeleteButton } from '../components';
 import fire from '../database/firebase';
 import firebase from "firebase";
+import { logOut } from '../controller/loginController'
 
 const UserDetailsScreen = (props) => {
 
@@ -22,6 +23,9 @@ const UserDetailsScreen = (props) => {
 
     //con esto tomamos el usuario vacio y lo alistamos para tomar parámetros
     const [user, setUser] = useState(objetoInicial)
+    const cerrarSesion = () => {
+        logOut()
+    }
 
 
 
@@ -53,11 +57,11 @@ const UserDetailsScreen = (props) => {
         setUser({ ...user, [name]: value })
     };
     //en esta fucion genero el dele en la base para eliminar usuarios
-    const eliminarUsuario = async () => {
-        const dbRef = firebase.db.collection('users').doc(props.route.params.user_id);
-        dbRef.delete();
-        props.navigation.navigate('UsersList')
-    };
+    // const eliminarUsuario = async () => {
+    //     const dbRef = firebase.db.collection('users').doc(props.route.params.user_id);
+    //     dbRef.delete();
+    //     props.navigation.navigate('UsersList')
+    // };
     //en esta fucion genero el dele en la base para modificar usuarios
     const modificarUsuario = async () => {
         const dbRef = fire.db.collection('users').doc(user.id);
@@ -76,12 +80,12 @@ const UserDetailsScreen = (props) => {
         props.navigation.navigate('Home')
     }
 
-    const confEliminar = () => {
-        Alert.alert("Eliminar Usuario", "Está seguro que desea eliminar?", [
-            { text: 'Yes', onPress: () => eliminarUsuario() },
-            { text: 'No', }
-        ])
-    }
+    // const confEliminar = () => {
+    //     Alert.alert("Eliminar Usuario", "Está seguro que desea eliminar?", [
+    //         { text: 'Yes', onPress: () => eliminarUsuario() },
+    //         { text: 'No', }
+    //     ])
+    // }
 
 
     if (loading) {
@@ -125,6 +129,7 @@ const UserDetailsScreen = (props) => {
 
 
             <AceptButton onPress={() => modificarUsuario()}>Guardar Usuario</AceptButton>
+            <DeleteButton >Cerrar Sesión</DeleteButton>
         </ScrollView>
 
     )

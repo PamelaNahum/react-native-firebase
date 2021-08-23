@@ -38,7 +38,7 @@ const PrincipalEjemplo = (props) => {
             </View>
 
             <View>
-                <SubmitButton onPress={() => iniciarSesion()}>Iniciar sesion</SubmitButton>
+                <SubmitButton  onPress={() => iniciarSesion()}>Iniciar sesion</SubmitButton>
             </View>
             <View>
                 <AceptButton onPress={() => props.navigation.navigate("SignUp")}>Registrate</AceptButton>

@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   wrapper: {
     height: 42,
     justifyContent: "center",
+    marginBottom:15,
   },
   button: {
     borderRadius: 30,
@@ -54,5 +55,6 @@ const styles = StyleSheet.create({
   label: {
     color: "#fff",
     fontWeight: "bold",
+    fontSize:15,
   },
 });

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, TextInput, ScrollView, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { SubmitButton } from '../components';
 import fire from '../database/firebase';
 import firebase from "firebase";
@@ -54,7 +54,6 @@ const CreateActivityScreen = (props) => {
                 nom_actividad: state.nom_actividad,
                 fecha: moment(date.toLocaleString('es-CL')).format('DD/MM/YYYY')
             })
-            console.log(moment(date.toLocaleString('es-CL')).format('DD-MM-YYYY'))
             props.navigation.navigate("Home");
 
         }
@@ -77,9 +76,19 @@ const CreateActivityScreen = (props) => {
                 />
             </View>
             <View>
-                <TouchableOpacity onPress={showDatepicker}>
-                    <Text style={styles.title}>{moment().format('DD/MM/YYYY')}</Text>
+            <Text style={styles.text}>Fecha</Text>
+                <TouchableOpacity 
+                onPress={showDatepicker} style={styles.touchable}>
+                
+                    <Image
+                            source={require('../assets/calendar.png')}
+                            resizeMode="contain"
+                            style={styles.imagen}
+                        />
+                    <Text style={{marginLeft:10, marginTop:5}}>{moment(date.toLocaleString('es-CL')).format('DD/MM/YYYY')}</Text>
+                    
                 </TouchableOpacity>
+                
             </View>
             {show && (
                 <DateTimePicker
@@ -87,9 +96,9 @@ const CreateActivityScreen = (props) => {
                     value={date}
                     mode={mode}
                     is24Hour={true}
-                    display="default"
+                    display="calendar"
                     onChange={onChange}
-
+                    maximumDate={new Date()}
 
                 />
             )}
@@ -139,6 +148,16 @@ const styles = StyleSheet.create({
         color: '#02be90',
         marginBottom: 10
     },
+    imagen: {
+        width: 30,
+        height: 30,
+
+    },
+    touchable: {
+        flex: 1,
+        flexDirection: 'row',
+        marginBottom:20
+    }
 
 })
 

@@ -119,7 +119,7 @@ const Home = (props) => {
                     </View>
                     <View style={{ position: 'absolute', bottom: "-40%" }}>
                         <View style={styles.graphic} >
-                            <Text style={{ color: 'black', fontSize: 22, lineHeight: 30, marginBottom: 10 }}>Su avance</Text>
+                            <Text style={{ color: 'black', fontSize: 22, lineHeight: 30, marginBottom: 10, marginTop:5 }}>Su Avance</Text>
                             <CircularProgress
                                 radius={90}
                                 value={parseInt(user.numCont)}

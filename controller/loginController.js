@@ -20,7 +20,7 @@ export function login(email, password, props) {
             Alert.alert("Usuario inválido", "Revise sus datos")
         })
 };
-//siguiendo la misma lógioca con esto debería ser para crear xD
+//siguiendo la misma lógica con esto debería ser para crear xD
 export function signUp(email, password, props) {
     firebase.auth()
         .createUserWithEmailAndPassword(email, password)
